@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Medical Services Access Control Portal</title>
+	<script src= "http://js/libs/modernizr-2.0.6.min.js"> </script>
+	{% load static from staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static "style.css"%}"/> 
+</head>
+<body>
+	<header>
+		<h1> Medical Portal Access Control Portal </h1>
+		<p id="firstp">Provider Login </p>
+	</header>
+<div id="box">
+	<h2>Login</h2>
+
+	<form action="/auth/" method="post"> {% csrf_token %}
+		<fieldset>
+		<label for="username"> User name: </label> <br>
+		<input type="text" name="username" value="" id="username" placeholder"Enter your username"/> <br>
+		
+		<label for="password"> Password: </label> <br>
+		<input type="password" name="password" value="" id="password" placeholder"Enter your password"/>
+		
+		<input type="submit" value="Login" />
+
+		</fieldset>
+	</form>
+</body>
+</html>

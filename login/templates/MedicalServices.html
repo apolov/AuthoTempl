@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Medical Services</title>
+	{% load static from staticfiles %}
+	<script src= "http://js/libs/modernizr-2.0.6.min.js"> </script>
+	<link rel="stylesheet" type="text/css" href="{% static "style2.css"%}" >
+</head>
+<body>
+<header>
+		<h1> Medical Portal Access Control Portal  </h1>
+		<h2> Hi {{full_name}} you are logged in </h2>
+		<p id="firstp">Service Selection </p>
+</header>
+<div id="selector">
+	
+	<ul class="nav">
+		<li><a href="">Start</a> </li>
+		
+		<li><a href="">Services</a>
+			
+			<ul>
+				{% for service in services %}
+				<li><a href="">{{service}}</a></li>
+			
+				{% endfor %}
+			</ul>
+		</li>
+	</ul>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<a href="Template.html"> Policy Creation </a>
+
+</body>
+</html>
