@@ -1,11 +1,13 @@
 # Create your views here.
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,get_object_or_404
 from django.http import HttpResponseRedirect 
+from django.template.context import RequestContext
 from django.contrib import auth 
 from django.template.loader import get_template
 from django.template import Context
 from django.core.context_processors import csrf 
-from models import Service
+from models import Service, Subject_type
+from forms import Configure_template
 
 
 def welcome(request):
@@ -47,3 +49,27 @@ class ServiceViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer  
+
+def ctemplate(request,id_service):
+	services = Service.objects.all()
+	#ser = get_object_or_404(Service,pk = id_service)
+	ser = Service.objects.get(pk = id_service)
+        subject_class = Subject_type.objects.filter(service = ser) 
+        full_name = request.user.username
+	
+        if request.method == 'POST':
+            form = Configure_template(request.POST)
+            if form.is_valid():
+                service = form.save(commit = False)
+                service.serviceprovider = request.user
+                service.save()
+                return HttpResponseRedirect('/loggedin/')
+        else:
+            form = Configure_template()
+        template = "configure_template.html"
+
+        return render_to_response(template,context_instance=RequestContext(request, locals()))
+
+
+    #form = Configure_template()
+    #return render_to_response('configure_template.html',{'form': form})

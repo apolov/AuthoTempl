@@ -8,7 +8,7 @@ from login.views import ServiceViewSet, UserViewSet
  
 router = routers.DefaultRouter()
 router.register(r'services', ServiceViewSet)
-router.register(r'user', UserViewSet) 
+router.register(r'users', UserViewSet) 
 
 urlpatterns = patterns('',
     # Examples:
@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'login.views.logout', name='logout'),
     url(r'^loggedin/$', 'login.views.loggedin', name='loggedin'),
     url(r'^invalid/$', 'login.views.invalid_login', name='invalid_login'),
+    url(r'^ctemplate/(\d+)$', 'login.views.ctemplate', name='ctemplate'),
+
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # url(r'^Proyect/', include('Proyect.foo.urls')),

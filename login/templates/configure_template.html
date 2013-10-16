@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Configure Template</title>
+	{% load static from staticfiles %}
+	<script src= "http://js/libs/modernizr-2.0.6.min.js"> </script>
+	<link rel="stylesheet" type="text/css" href="{% static "style2.css"%}" >
+</head>
+<body>
+	<header>
+		<h1> Medical Portal Access Control Portal  </h1>
+		<h2> {{full_name}} you are logged in </h2>
+		<p id="firstp">Template Configuration Selection </p>
+	</header>
+
+		<fieldset>
+	
+		<legend> Activate Subject Attribute</legend>
+		 <form method="PUT">
+	    <div id="form">
+	        {% csrf_token %}
+		    {{form.as_p}}
+
+		    </fieldset>
+		    <input type="submit">
+
+		<form>
+		</div>
+	
+
+
+				 
+
+
+</body>
+</html>
