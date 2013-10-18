@@ -33,10 +33,10 @@ class Enviroment_type(models.Model):
 
 class Service(models.Model):
 	name = models.CharField(max_length=140)
-	subject_class = models.OneToOneField(Subject_type)
-	resource_class = models.OneToOneField(Resource_type)
-	action_class = models.OneToOneField(Action_type)
-	enviroment_class = models.OneToOneField(Enviroment_type)
+	subject_class = models.ForeignKey(Subject_type)
+	resource_class = models.ForeignKey(Resource_type)
+	action_class = models.ForeignKey(Action_type)
+	enviroment_class = models.ForeignKey(Enviroment_type)
 	serviceprovider = models.ManyToManyField(User)   
 
 	def __unicode__(self):

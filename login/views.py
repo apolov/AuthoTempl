@@ -6,7 +6,7 @@ from django.contrib import auth
 from django.template.loader import get_template
 from django.template import Context
 from django.core.context_processors import csrf 
-from models import Service, Subject_type
+from models import Service, Subject_type, Resource_type, Enviroment_type, Action_type
 from forms import Configure_template
 
 
@@ -51,19 +51,23 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer  
 
 def ctemplate(request,id_service):
-	services = Service.objects.all()
-	#ser = get_object_or_404(Service,pk = id_service)
-	ser = Service.objects.get(pk = id_service)
-        subject_class = Subject_type.objects.filter(service = ser) 
+	#services = Service.objects.all()
+	ser = get_object_or_404(Service, id= id_service)
+	#ser = Service.objects.get(pk = id_service)
+        #subject_class = Subject_type.objects.filter(service = ser) 
+        #resource_class = Resource_type.objects.filter(service = ser) 
+        #action_class = Action_type.objects.filter(service = ser)
+        #enviroment_class = Enviroment_type.objects.filter(service = ser)
+
         full_name = request.user.username
 	
         if request.method == 'POST':
             form = Configure_template(request.POST)
             if form.is_valid():
                 service = form.save(commit = False)
-                service.serviceprovider = request.user
+                #service.serviceprovider = request.user
                 service.save()
-                return HttpResponseRedirect('/loggedin/')
+                return HttpResponseRedirect('/invalid/')
         else:
             form = Configure_template()
         template = "configure_template.html"

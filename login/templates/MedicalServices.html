@@ -21,8 +21,8 @@
 		<li><a href="">Services</a>
 			
 			<ul>
-				{% for ser in services %}
-				<li><a href="{% url "ctemplate" ser.pk %}">{{ser}}</a></li>
+				{% for service in services %}
+				<li><a href="{% url "ctemplate" service.id %}">{{service}}</a></li>
 				{% endfor %}
 			</ul>
 		</li>
