@@ -62,17 +62,20 @@ def ctemplate(request,id_service):
         full_name = request.user.username
 	
         if request.method == 'POST':
-            form = Configure_template(request.POST)
+            form = Configure_template(request.POST, instance=ser)
             if form.is_valid():
                 service = form.save(commit = False)
                 #service.serviceprovider = request.user
                 service.save()
-                return HttpResponseRedirect('/invalid/')
+                return HttpResponseRedirect('/tconfsumitted/')
         else:
             form = Configure_template()
         template = "configure_template.html"
 
         return render_to_response(template,context_instance=RequestContext(request, locals()))
+
+def tconfsumitted(request):
+    return render_to_response('template_configured.html')
 
 
     #form = Configure_template()

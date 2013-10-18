@@ -11,38 +11,8 @@
 <header>
 		<h1> Medical Portal Access Control Portal  </h1>
 		<h2> Hi {{full_name}} you are logged in </h2>
-		<p id="firstp">Service Selection </p>
+		<p id="firstp">Template Configuration Success </p>
 </header>
-<div id="selector">
-	
-	<ul class="nav">
-		<li><a href="">Start</a> </li>
-		
-		<li><a href="">Services</a>
-			
-			<ul>
-				{% for service in services %}
-				<li><a href="{% url "ctemplate" service.id %}">{{service}}</a></li>
-				{% endfor %}
-			</ul>
-		</li>
-	</ul>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 
 </body>
