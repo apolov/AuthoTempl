@@ -2,11 +2,11 @@
 from django.shortcuts import render_to_response,get_object_or_404
 from django.http import HttpResponseRedirect 
 from django.template.context import RequestContext
-from django.contrib import auth 
+from django.contrib import auth
 from django.template.loader import get_template
 from django.template import Context
 from django.core.context_processors import csrf 
-from models import Service, Subject_type, Resource_type, Enviroment_type, Action_type
+from models import Service
 from forms import Configure_template
 
 
@@ -22,10 +22,17 @@ def auth_view(request):
 
 	if user is not None:
 		auth.login(request, user)
+        #if user.group.name ='Customers':
 		return HttpResponseRedirect('/loggedin/')
+
+
+
 	else:
 
 		return HttpResponseRedirect('/invalid/')
+
+def loggedincustomer(request):
+    return render_to_response ('customer.html')
 
 def loggedin(request):
 	service = Service.objects.filter(serviceprovider = request.user) 
