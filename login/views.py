@@ -22,13 +22,11 @@ def auth_view(request):
 
 	if user is not None:
 		auth.login(request, user)
-        #if user.group.name ='Customers':
-		return HttpResponseRedirect('/loggedin/')
-
-
-
+        if user.groups.filter (name='Customers'):
+		  return HttpResponseRedirect('/loggedincustomer/')
+        elif user.groups.filter (name='Service Providers'):
+          return HttpResponseRedirect('/loggedin/')
 	else:
-
 		return HttpResponseRedirect('/invalid/')
 
 def loggedincustomer(request):
