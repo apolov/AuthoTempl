@@ -21,16 +21,17 @@ def auth_view(request):
 	user = auth.authenticate(username=username, password=password)
 
 	if user is not None:
-		auth.login(request, user)
+                auth.login(request, user)
         if user.groups.filter (name='Customers'):
-		  return HttpResponseRedirect('/loggedincustomer/')
-        elif user.groups.filter (name='Service Providers'):
+                  return HttpResponseRedirect('/loggedincustomer/')
+        elif user.groups.filter (name='ServiceProviders'):
           return HttpResponseRedirect('/loggedin/')
-	else:
-		return HttpResponseRedirect('/invalid/')
+        else:
+                return HttpResponseRedirect('/invalid/')
 
 def loggedincustomer(request):
-    return render_to_response ('customer.html')
+    service = Service.objects.filter(customer = request.user) 
+    return render_to_response ('customer.html', {'full_name':request.user.username, 'services':service})
 
 def loggedin(request):
 	service = Service.objects.filter(serviceprovider = request.user) 
@@ -78,6 +79,25 @@ def ctemplate(request,id_service):
         template = "configure_template.html"
 
         return render_to_response(template,context_instance=RequestContext(request, locals()))
+def cpolicy(request,id_service):
+    #services = Service.objects.all()
+    ser = get_object_or_404(Service, id= id_service)
+
+        full_name = request.user.username
+    
+        if request.method == 'POST':
+            form = Configure_template(request.POST, instance=ser)
+            if form.is_valid():
+                service = form.save(commit = False)
+                #service.serviceprovider = request.user
+                service.save()
+                return HttpResponseRedirect('/tconfsumitted/')
+        else:
+            form = Configure_template()
+        template = "configure_template.html"
+
+        return render_to_response(template,context_instance=RequestContext(request, locals()))
+
 
 def tconfsumitted(request):
     return render_to_response('template_configured.html')
