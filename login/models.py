@@ -26,7 +26,6 @@ class Enviroment_type(models.Model):
 	def __unicode__(self):
 			return self.name 
 
-
 # class Service_provider(models.Model):
 # 	company = models.CharField(max_length=140);
 

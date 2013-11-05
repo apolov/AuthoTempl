@@ -59,12 +59,6 @@ class UserViewSet(viewsets.ModelViewSet):
 def ctemplate(request,id_service):
 	#services = Service.objects.all()
 	ser = get_object_or_404(Service, id= id_service)
-	#ser = Service.objects.get(pk = id_service)
-        #subject_class = Subject_type.objects.filter(service = ser) 
-        #resource_class = Resource_type.objects.filter(service = ser) 
-        #action_class = Action_type.objects.filter(service = ser)
-        #enviroment_class = Enviroment_type.objects.filter(service = ser)
-
         full_name = request.user.username
 	
         if request.method == 'POST':
@@ -79,25 +73,24 @@ def ctemplate(request,id_service):
         template = "configure_template.html"
 
         return render_to_response(template,context_instance=RequestContext(request, locals()))
-def cpolicy(request,id_service):
-    #services = Service.objects.all()
-    ser = get_object_or_404(Service, id= id_service)
 
-        full_name = request.user.username
+# def cpolicy(request,id_service):
+#     #services = Service.objects.all()
+#     ser = get_object_or_404(Service, id= id_service)
+#         full_name = request.user.username
     
-        if request.method == 'POST':
-            form = Configure_template(request.POST, instance=ser)
-            if form.is_valid():
-                service = form.save(commit = False)
-                #service.serviceprovider = request.user
-                service.save()
-                return HttpResponseRedirect('/tconfsumitted/')
-        else:
-            form = Configure_template()
-        template = "configure_template.html"
+#         if request.method == 'POST':
+#             form = Configure_template(request.POST, instance=ser)
+#             if form.is_valid():
+#                 service = form.save(commit = False)
+#                 #service.serviceprovider = request.user
+#                 service.save()
+#                 return HttpResponseRedirect('/')
+#         else:
+#             form = Configure_template()
+#         template = "configure_template.html"
 
-        return render_to_response(template,context_instance=RequestContext(request, locals()))
-
+#         return render_to_response(template,context_instance=RequestContext(request, locals()))
 
 def tconfsumitted(request):
     return render_to_response('template_configured.html')
